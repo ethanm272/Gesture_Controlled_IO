@@ -7,9 +7,9 @@ Ethan Mylett
 ## Run Instructions
 - Navigate to the directory containing this project
 - Make sure the following dependencies are installed:
--- OpenCV
--- Mediapipe
--- Pyautogui
+  - OpenCV
+  - Mediapipe
+  - Pyautogui
 - Enter the command 'python3 mediapipe.py'
 - Allow the program access to webcam and computer controls (may require re-run)
 
