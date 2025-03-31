@@ -19,18 +19,20 @@ VisionRunningMode = mp.tasks.vision.RunningMode
 
 # Mouse Controller
 MOUSE_MOVEMENT_GESTURE = 'Pointing_Up'
-mc = mouse_controller.mouse_controller(MOUSE_MOVEMENT_GESTURE)
+mc = mouse_controller.mouse_controller(MOUSE_MOVEMENT_GESTURE, round(1000 * time.time()))
 
 # Callback function
 def show_result(result: GestureRecognizerResult, output_image: mp.Image, timestamp_ms: int):
     if (len(result.gestures) == 0):
         return # if no hand detected
-    mc.move_mouse((result.hand_landmarks[0][8].x, result.hand_landmarks[0][8].y), result.gestures[0][0].category_name)
+        
+    mc.move_mouse((result.hand_landmarks[0][8].x, result.hand_landmarks[0][8].y), result.gestures[0][0].category_name, timestamp_ms)
 
 options = GestureRecognizerOptions(
     base_options=BaseOptions(model_asset_path=model_path),
     running_mode=VisionRunningMode.LIVE_STREAM,
     result_callback=show_result)
+
 with GestureRecognizer.create_from_options(options) as rec:
     video = cv2.VideoCapture(0)
     
